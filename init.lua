@@ -19,3 +19,5 @@ vim.g.maplocalleader = ' '
 local mod_dir_to_spec = nixInfo.lze.mod_dir_to_spec
 
 nixInfo.lze.load { import = mod_dir_to_spec('plugins') }
+
+require("keymaps")

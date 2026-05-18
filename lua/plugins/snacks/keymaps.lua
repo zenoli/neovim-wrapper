@@ -1,5 +1,5 @@
 map = vim.keymap.set
-map("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks file explorer' })
+map("n", "<leader>e", function() Snacks.explorer.open() end, { desc = 'Snacks file explorer' })
 map("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
 map("n", "<leader>_", function() Snacks.lazygit.open() end, { desc = 'Snacks LazyGit' })
 map('n', "<leader>sf", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
@@ -13,7 +13,6 @@ map('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Gr
 map('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
 map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or ord" })
 -- search
-map('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
 map('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
 map('n', "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer Diagnostics" })
 map('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })

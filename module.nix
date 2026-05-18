@@ -14,7 +14,8 @@ inputs:
     default = config.nvim-lib.pluginsFromPrefix "plugins-" inputs;
   };
 
-  config.settings.config_directory = ./.;
+  # config.settings.config_directory = ./.;
+  config.settings.config_directory = "/home/olivier/repos/neovim";
   config.specs.lze = with config.nvim-lib.neovimPlugins; [ lze lzextras ];
 
   # you can name these whatever you want.
