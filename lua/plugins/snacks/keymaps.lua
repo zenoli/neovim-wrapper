@@ -1,0 +1,27 @@
+map = vim.keymap.set
+map("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks file explorer' })
+map("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
+map("n", "<leader>_", function() Snacks.lazygit.open() end, { desc = 'Snacks LazyGit' })
+map('n', "<leader>sf", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
+map('n', "<leader><leader>s", function() Snacks.picker.buffers() end, { desc = "Search Buffers" })
+-- find
+map('n', "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+map('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+-- Grep
+map('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+map('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
+map('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
+map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or ord" })
+-- search
+map('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+map('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+map('n', "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer Diagnostics" })
+map('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
+map('n', "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" })
+map('n', "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" })
+map('n', "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" })
+map('n', "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
+map('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" })
+map('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
+map('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
+map('n', "<leader>su", function() Snacks.picker.undo() end, { desc = "Undo History" })
