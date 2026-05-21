@@ -5,12 +5,12 @@ map("n", "<leader>_", function() Snacks.lazygit.open() end, { desc = 'Snacks Laz
 map('n', "<leader>sf", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 map('n', "<leader><leader>s", function() Snacks.picker.buffers() end, { desc = "Search Buffers" })
 -- find
-map('n', "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
-map('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+map('n', "<leader>f", function() Snacks.picker.files() end, { desc = "Find Files" })
+map('n', "<leader>sg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 -- Grep
 map('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
 map('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
-map('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
+map('n', "<leader>a", function() Snacks.picker.grep() end, { desc = "Grep" })
 map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or ord" })
 -- search
 map('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })

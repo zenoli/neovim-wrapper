@@ -1,7 +1,6 @@
 vim.loader.enable() -- <- bytecode caching
 do
   -- Set up a global in a way that also handles non-nix compat
-  local ok
   _G.nixInfo = require(vim.g.nix_info_plugin_name)
 
   ---@module 'lzextras'
@@ -12,6 +11,9 @@ do
   end
 end
 
+nixInfo.lze.register_handlers { nixInfo.lze.lsp }
+
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -21,3 +23,4 @@ local mod_dir_to_spec = nixInfo.lze.mod_dir_to_spec
 nixInfo.lze.load { import = mod_dir_to_spec('plugins') }
 
 require("keymaps")
+
