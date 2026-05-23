@@ -57,20 +57,21 @@ inputs:
     # plugins are of type wlib.types.stringable
     data = with pkgs.vimPlugins; [
       { data = snacks-nvim; extraPackages = with pkgs; [ fd ripgrep ]; }
-      nvim-lspconfig
-      nvim-surround
-      vim-startuptime
       blink-cmp
       blink-compat
       cmp-cmdline
       colorful-menu-nvim
-      lualine-nvim
-      gitsigns-nvim
-      fidget-nvim
-      nvim-lint
       conform-nvim
+      fidget-nvim
+      gitsigns-nvim
+      lualine-nvim
+      nvim-lint
+      nvim-lspconfig
+      nvim-surround
       nvim-treesitter-textobjects
       nvim-treesitter.withAllGrammars
+      vim-fugitive
+      vim-startuptime
     ];
   };
 
