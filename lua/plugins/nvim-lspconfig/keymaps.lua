@@ -15,6 +15,11 @@ return {
     nmap("<leader>ld", function() vim.diagnostic.open_float { scope = "line" } end, "Show line diagnostics")
     nmap("<leader>cd", function() vim.diagnostic.open_float { scope = "cursor" } end, "Show cursor diagnostics")
 
+
+    -- Overwrite the default keybindings as they are not showing the floating window
+    nmap('[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Previous [D]iagnostic')
+    nmap(']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next [D]iagnostic')
+
     -- Lesser used LSP functionality
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   end

@@ -12,6 +12,7 @@ return {
         },
       },
       indent = {
+        enabled = true,
         scope = {
           hl = 'MySnacksIndent',
         },
@@ -21,7 +22,7 @@ return {
         }
       },
       statuscolumn = {
-        enabled = false,
+        enabled = true,
         left = { "mark", "git" },   -- priority of signs on the left (high to low)
         right = { "sign", "fold" }, -- priority of signs on the right (high to low)
         folds = {
