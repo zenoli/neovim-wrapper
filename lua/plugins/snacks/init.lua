@@ -13,13 +13,13 @@ return {
       },
       indent = {
         enabled = true,
-        scope = {
-          hl = 'MySnacksIndent',
-        },
-        chunk = {
-          -- enabled = true,
-          hl = 'MySnacksIndent',
-        }
+        -- scope = {
+        --   hl = 'MySnacksIndent',
+        -- },
+        -- chunk = {
+        --   enabled = true,
+        --   hl = 'MySnacksIndent',
+        -- }
       },
       statuscolumn = {
         enabled = true,
