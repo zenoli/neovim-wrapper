@@ -2,7 +2,6 @@ vim.loader.enable() -- <- bytecode caching
 do
   -- Set up a global in a way that also handles non-nix compat
   _G.nixInfo = require(vim.g.nix_info_plugin_name)
-
   ---@module 'lzextras'
   ---@type lzextras | lze
   nixInfo.lze = setmetatable(require('lze'), getmetatable(require('lzextras')))
@@ -23,3 +22,6 @@ nixInfo.lze.load { import = mod_dir_to_spec('plugins') }
 
 require("keymaps")
 require("options")
+require("lsp")
+
+require('vim._core.ui2').enable({ enable = true })
