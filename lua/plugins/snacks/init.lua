@@ -13,13 +13,12 @@ return {
       },
       indent = {
         enabled = true,
-        -- scope = {
-        --   hl = 'MySnacksIndent',
-        -- },
-        -- chunk = {
-        --   enabled = true,
-        --   hl = 'MySnacksIndent',
-        -- }
+        animate = {
+          duration = {
+            step = 5, -- ms per step
+            total = 500, -- maximum duration
+          },
+        },
       },
       statuscolumn = {
         enabled = true,
