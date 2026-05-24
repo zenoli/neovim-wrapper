@@ -13,7 +13,6 @@ end
 
 nixInfo.lze.register_handlers { nixInfo.lze.lsp }
 
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
