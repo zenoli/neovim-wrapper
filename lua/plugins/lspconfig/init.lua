@@ -15,7 +15,7 @@ return {
           end
           vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
-        require("plugins.nvim-lspconfig.keymaps").load(nmap)
+        require("plugins.lspconfig.keymaps").load(nmap)
 
         -- Create a command `:Format` local to the LSP buffer
         vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)

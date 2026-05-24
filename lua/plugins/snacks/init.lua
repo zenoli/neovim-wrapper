@@ -15,13 +15,13 @@ return {
         enabled = true,
         animate = {
           duration = {
-            step = 5, -- ms per step
+            step = 5,    -- ms per step
             total = 500, -- maximum duration
           },
         },
       },
       statuscolumn = {
-        enabled = true,
+        enabled = false,
         left = { "mark", "git" },   -- priority of signs on the left (high to low)
         right = { "sign", "fold" }, -- priority of signs on the right (high to low)
         folds = {
@@ -34,10 +34,19 @@ return {
         },
         refresh = 50, -- refresh at most every 50ms
       },
+      words = {
+        enabled = true,
+      },
+      bigfile = {
+        enabled = true,
+      },
+      input = {
+        enabled = true,
+      },
+      notifier = {
+        enabled = true,
+      },
     })
-    -- Handle the backend of those remote commands.
-    -- hopefully this can be removed one day
-    -- NOTE: we aren't loading this lazily, and the keybinds already are so it is fine to just set these here
     require("plugins.snacks.keymaps")
   end
 }
