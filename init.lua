@@ -15,14 +15,15 @@ nixInfo.lze.register_handlers { nixInfo.lze.lsp }
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- nixInfo.lze.load("plugins")
-local mod_dir_to_spec = nixInfo.lze.mod_dir_to_spec
+local import = nixInfo.lze.mod_dir_to_spec
 
-nixInfo.lze.load { import = mod_dir_to_spec('plugins') }
+nixInfo.lze.load {
+  import('plugins'),
+  import('lsp.servers'),
+}
 
 require("keymaps")
 require("options")
 require("lsp")
 
 require('vim._core.ui2').enable({ enable = true })
-
