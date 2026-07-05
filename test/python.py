@@ -3,7 +3,11 @@ def foo():
     return 5 + 2
 
 
-def bar():
+def bar(x: int | None):
+
+
+    if x == None:
+        return 5
     return 2
 
 

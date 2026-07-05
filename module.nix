@@ -16,7 +16,10 @@ inputs:
 
   # config.settings.config_directory = ./.;
   config.settings.config_directory = "/home/olivier/repos/neovim";
-  config.specs.lze = with config.nvim-lib.neovimPlugins; [ lze lzextras ];
+  config.specs.lze = with config.nvim-lib.neovimPlugins; [
+    lze
+    lzextras
+  ];
 
   # you can name these whatever you want.
   config.specs.nix = {
@@ -66,7 +69,13 @@ inputs:
     # here we chose a DAL of plugins, but we can also pass a single plugin, or null
     # plugins are of type wlib.types.stringable
     data = with pkgs.vimPlugins; [
-      { data = snacks-nvim; extraPackages = with pkgs; [ fd ripgrep ]; }
+      {
+        data = snacks-nvim;
+        extraPackages = with pkgs; [
+          fd
+          ripgrep
+        ];
+      }
       blink-cmp
       blink-compat
       cmp-cmdline
