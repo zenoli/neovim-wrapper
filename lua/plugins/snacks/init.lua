@@ -1,3 +1,5 @@
+local cursor_relative_input = true
+
 return {
   "snacks.nvim",
   lazy = false,
@@ -42,6 +44,13 @@ return {
       },
       input = {
         enabled = true,
+      },
+      styles = {
+        input = cursor_relative_input and {
+          relative = "cursor",
+          row = -3,
+          col = 0,
+        } or nil,
       },
       notifier = {
         enabled = true,
