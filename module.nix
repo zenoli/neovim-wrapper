@@ -39,6 +39,16 @@ inputs:
     ];
   };
 
+  config.specs.python = {
+    after = [ "general" ];
+    lazy = true;
+    data = with pkgs.vimPlugins; [ ];
+    extraPackages = with pkgs; [
+      basedpyright
+      ruff
+    ];
+  };
+
   config.specs.general = {
     # this would ensure any config included from nix in here will be ran after any provided by the `lze` spec
     # If we provided any from within either spec, anyway
@@ -71,7 +81,9 @@ inputs:
       nvim-treesitter-textobjects
       nvim-treesitter.withAllGrammars
       vim-fugitive
+      vim-tmux-navigator
       vim-startuptime
+      which-key-nvim
     ];
   };
 

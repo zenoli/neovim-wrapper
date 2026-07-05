@@ -1,4 +1,14 @@
 return {
+  disable_defaults = function()
+    for _, key in ipairs({ 'grn', 'gra', 'grr', 'gri', 'grx', 'grt' }) do
+      vim.keymap.del('n', key)
+    end
+  end,
+  disable_defaults2 = function(buf)
+    for _, key in ipairs({ 'grn', 'gra', 'grr', 'gri', 'grx', 'grt' }) do
+      vim.keymap.del('n', key)
+    end
+  end,
   load = function(nmap)
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')

@@ -10,11 +10,11 @@ map("v", "<leader>s<leader>", ": s/", { desc = "Substitute visual selection" })
 map("n", "<leader><esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart neovim" })
 
--- window navigation
-map("n", "<A-h>", "<C-w>h", { desc = "Move to left window" })
-map("n", "<A-j>", "<C-w>j", { desc = "Move to bottom window" })
-map("n", "<A-k>", "<C-w>k", { desc = "Move to top window" })
-map("n", "<A-l>", "<C-w>l", { desc = "Move to right window" })
+-- -- window navigation
+-- map("n", "<A-h>", "<C-w>h", { desc = "Move to left window" })
+-- map("n", "<A-j>", "<C-w>j", { desc = "Move to bottom window" })
+-- map("n", "<A-k>", "<C-w>k", { desc = "Move to top window" })
+-- map("n", "<A-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- scrolling
 map("n", "<c-j>", "5<c-e>", { desc = "Scroll down" })
