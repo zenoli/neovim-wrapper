@@ -3,7 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   after = function(plugin)
-    require('snacks').setup({
+    require("snacks").setup({
       picker = {
         sources = {
           explorer = {
@@ -15,18 +15,18 @@ return {
         enabled = true,
         animate = {
           duration = {
-            step = 5,    -- ms per step
+            step = 5, -- ms per step
             total = 500, -- maximum duration
           },
         },
       },
       statuscolumn = {
         enabled = false,
-        left = { "mark", "git" },   -- priority of signs on the left (high to low)
+        left = { "mark", "git" }, -- priority of signs on the left (high to low)
         right = { "sign", "fold" }, -- priority of signs on the right (high to low)
         folds = {
-          open = false,             -- show open fold icons
-          git_hl = false,           -- use Git Signs hl for fold icons
+          open = false, -- show open fold icons
+          git_hl = false, -- use Git Signs hl for fold icons
         },
         git = {
           -- patterns to match Git signs
@@ -48,5 +48,5 @@ return {
       },
     })
     require("plugins.snacks.keymaps")
-  end
+  end,
 }
