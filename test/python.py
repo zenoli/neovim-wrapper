@@ -1,9 +1,13 @@
 def foo():
+    print("hello world")
     return 5 + 2
 
 
-print(foo())
+def bar():
+    return 2
+
 
 print(foo())
 
 
+print(foo())

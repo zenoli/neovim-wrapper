@@ -26,7 +26,7 @@ return {
     nmap('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
     nmap('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
     nmap('<leader>ds', Snacks.picker.lsp_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>F', vim.lsp.buf.format, 'Format document')
+    -- nmap('<leader>F', vim.lsp.buf.format, 'Format document')
 
     -- See `:help K` for why this keymap
     nmap('gh', vim.lsp.buf.signature_help, 'Signature Documentation')
