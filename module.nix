@@ -78,6 +78,8 @@ inputs:
       }
       blink-cmp
       blink-compat
+      catppuccin-nvim
+      papercolor-theme
       cmp-cmdline
       colorful-menu-nvim
       conform-nvim
