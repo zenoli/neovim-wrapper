@@ -81,6 +81,7 @@ inputs:
       cmp-cmdline
       colorful-menu-nvim
       conform-nvim
+      dropbar-nvim
       fidget-nvim
       gitsigns-nvim
       lualine-nvim
@@ -90,8 +91,8 @@ inputs:
       nvim-treesitter-textobjects
       nvim-treesitter.withAllGrammars
       vim-fugitive
-      vim-tmux-navigator
       vim-startuptime
+      vim-tmux-navigator
       which-key-nvim
     ];
   };
