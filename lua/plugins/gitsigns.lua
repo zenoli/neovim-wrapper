@@ -6,7 +6,6 @@ local signs = {
 }
 return {
   "gitsigns.nvim",
-  auto_enable = true,
   event = "DeferredUIEnter",
   -- cmd = { "" },
   -- ft = "",

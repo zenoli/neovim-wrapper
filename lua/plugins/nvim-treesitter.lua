@@ -1,7 +1,6 @@
 return {
   "nvim-treesitter",
   lazy = false,
-  auto_enable = true,
   after = function(plugin)
     ---@param buf integer
     ---@param language string
