@@ -13,6 +13,10 @@ def baz():
     return 1
 
 
+def test_foo():
+    assert True
+
+
 print(foo())
 
 

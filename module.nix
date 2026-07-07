@@ -45,7 +45,7 @@ inputs:
   config.specs.python = {
     after = [ "general" ];
     lazy = true;
-    data = with pkgs.vimPlugins; [ ];
+    data = with pkgs.vimPlugins; [ neotest-python ];
     extraPackages = with pkgs; [
       basedpyright
       ruff
@@ -87,6 +87,7 @@ inputs:
       fidget-nvim
       gitsigns-nvim
       lualine-nvim
+      neotest
       nvim-lint
       nvim-lspconfig
       nvim-surround
