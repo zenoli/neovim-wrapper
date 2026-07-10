@@ -1,3 +1,3 @@
-return function(name)
-  require("neotest-" .. name)
+return function(lang)
+  return require("neotest-" .. lang)
 end
