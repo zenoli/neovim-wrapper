@@ -1,3 +1,4 @@
+---@return string[]
 local function get_langs()
   local lang_dir = require("nix-info").settings.config_directory .. "/lua/lang"
   local langs = {}
@@ -11,12 +12,16 @@ local function get_langs()
   return langs
 end
 
+---@param langs string[]
+---@return lze.PluginSpec[]
 local function get_neotest_extensions(langs)
   return vim.tbl_map(function(lang)
     return { "neotest-" .. lang, dep_of = "neotest" }
   end, langs)
 end
 
+---@param langs string[]
+---@return neotest.Adapter[]
 local function get_neotest_adapters(langs)
   return vim.tbl_map(function(lang)
     local module = "lang" .. "." .. lang .. ".test"
@@ -26,6 +31,7 @@ end
 
 local test_langs = get_langs()
 
+---@type lze.PluginSpec[]
 return vim.list_extend(get_neotest_extensions(test_langs), {
   {
     "neotest",
