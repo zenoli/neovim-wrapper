@@ -1,12 +1,8 @@
 return {
   "conform.nvim",
-  -- cmd = { "" },
-  -- event = "",
-  -- ft = "",
   keys = {
     { "<leader>F", desc = "[F]ormat [F]ile" },
   },
-  -- colorscheme = "",
   after = function(plugin)
     local conform = require("conform")
 

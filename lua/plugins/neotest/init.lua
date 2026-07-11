@@ -1,44 +1,59 @@
----@return string[]
-local function get_langs()
-  local lang_dir = require("nix-info").settings.config_directory .. "/lua/lang"
-  local langs = {}
-  for name, type in vim.fs.dir(lang_dir) do
-    if type == "directory" then
-      if vim.uv.fs_stat(lang_dir .. "/" .. name .. "/test.lua") then
-        table.insert(langs, name)
+local function get_lang_dir()
+  return require("nix-info").settings.config_directory .. "/lua/lang"
+end
+
+---@param raw any
+---@return { name?: string, config?: table }[]
+local function normalize_specs(raw)
+  if raw == true then
+    return { {} }
+  elseif vim.islist(raw) then
+    return raw
+  else
+    return { raw }
+  end
+end
+
+---@return {
+---extensions: lze.PluginSpec[],
+---adapter_specs: { name: string, config?: table }[] }
+local function get_neotest_config()
+  local lang_dir = get_lang_dir()
+  local extensions = {}
+  local adapter_specs = {}
+  for name, _ in vim.fs.dir(lang_dir) do
+    local lang = name:match("^(.+)%.lua$") or name
+    local module = require("lang." .. lang)
+    if module.neotest then
+      for _, spec in ipairs(normalize_specs(module.neotest)) do
+        local adapter_name = spec.name or ("neotest-" .. lang)
+        table.insert(extensions, { adapter_name, dep_of = "neotest" })
+        table.insert(adapter_specs, { name = adapter_name, config = spec.config })
       end
     end
   end
-  return langs
+  return {
+    extensions = extensions,
+    adapter_specs = adapter_specs,
+  }
 end
 
----@param langs string[]
----@return lze.PluginSpec[]
-local function get_neotest_extensions(langs)
-  return vim.tbl_map(function(lang)
-    return { "neotest-" .. lang, dep_of = "neotest" }
-  end, langs)
-end
-
----@param langs string[]
----@return neotest.Adapter[]
-local function get_neotest_adapters(langs)
-  return vim.tbl_map(function(lang)
-    local module = "lang" .. "." .. lang .. ".test"
-    return require(module)(lang)
-  end, langs)
-end
-
-local test_langs = get_langs()
+local config = get_neotest_config()
 
 ---@type lze.PluginSpec[]
-return vim.list_extend(get_neotest_extensions(test_langs), {
+return vim.list_extend(config.extensions, {
   {
     "neotest",
     keys = require("plugins.neotest.keymaps"),
     after = function()
       require("neotest").setup({
-        adapters = get_neotest_adapters(test_langs),
+        adapters = vim.tbl_map(function(spec)
+          if spec.config ~= nil then
+            return require(spec.name)(spec.config)
+          else
+            return require(spec.name)
+          end
+        end, config.adapter_specs),
       })
     end,
   },

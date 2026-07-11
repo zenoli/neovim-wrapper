@@ -1,8 +1,5 @@
 return {
-  neotest = {
-    name = "neotest-python",
-    config = {},
-  },
+  neotest = true,
   lsp = {
     basedpyright = {
       filetypes = { "python" },
