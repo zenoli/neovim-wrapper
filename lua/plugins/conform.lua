@@ -7,18 +7,7 @@ return {
     local conform = require("conform")
 
     conform.setup({
-      formatters_by_ft = {
-        -- NOTE: download some formatters
-        -- and configure them here
-        lua = { "stylua" },
-        python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
-        -- go = { "gofmt", "golint" },
-        -- templ = { "templ" },
-        -- Conform will run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        -- Use a sub-list to run only the first available formatter
-        -- javascript = { { "prettierd", "prettier" } },
-      },
+      formatters_by_ft = require("loaders.format").get_formatters_by_ft(),
       default_format_opts = {
         lsp_format = "fallback",
       },
