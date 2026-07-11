@@ -78,6 +78,7 @@ inputs:
       }
       blink-cmp
       blink-compat
+      blink-pairs
       catppuccin-nvim
       papercolor-theme
       cmp-cmdline
