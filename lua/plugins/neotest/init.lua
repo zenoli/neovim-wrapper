@@ -1,4 +1,4 @@
-local neotest_langs = require("langs.neotest")
+local neotest_langs = require("loaders.neotest")
 local config = neotest_langs.get_config()
 
 ---@type lze.PluginSpec[]

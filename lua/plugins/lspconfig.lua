@@ -1,4 +1,4 @@
-return vim.list_extend(require("langs.lsp").get_specs(), {
+return vim.list_extend(require("loaders.lsp").get_specs(), {
   {
     "nvim-lspconfig",
     lsp = function(plugin)
