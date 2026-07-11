@@ -49,6 +49,9 @@
           default = self.packages.${system}.neovim;
         }
       );
+      devShells = forAllSystems (system: {
+        default = import ./shell.nix { pkgs = import nixpkgs { inherit system; }; };
+      });
       # home manager and nixos modules
       # `wrappers.neovim.enable = true`
       # You can set any of the options.
