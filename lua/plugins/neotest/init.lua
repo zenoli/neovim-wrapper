@@ -1,4 +1,5 @@
-local get_langs = function(lang_dir)
+local function get_langs()
+  local lang_dir = require("nix-info").settings.config_directory .. "/lua/lang"
   local langs = {}
   for name, type in vim.fs.dir(lang_dir) do
     if type == "directory" then
@@ -10,30 +11,28 @@ local get_langs = function(lang_dir)
   return langs
 end
 
-local lang_dir = require("nix-info").settings.config_directory .. "/lua/lang"
-local test_langs = get_langs(lang_dir)
-vim.print(test_langs)
-
-local adapter_modules = vim.tbl_map(function(lang)
-  return "lang" .. "." .. lang .. ".test"
-end, test_langs)
-vim.print(adapter_modules)
-
-local get_neotest_extensions = function()
+local function get_neotest_extensions(langs)
   return vim.tbl_map(function(lang)
     return { "neotest-" .. lang, dep_of = "neotest" }
-  end, test_langs)
+  end, langs)
 end
 
-return vim.list_extend(get_neotest_extensions(), {
+local function get_neotest_adapters(langs)
+  return vim.tbl_map(function(lang)
+    local module = "lang" .. "." .. lang .. ".test"
+    return require(module)(lang)
+  end, langs)
+end
+
+local test_langs = get_langs()
+
+return vim.list_extend(get_neotest_extensions(test_langs), {
   {
     "neotest",
     keys = require("plugins.neotest.keymaps"),
     after = function()
       require("neotest").setup({
-        adapters = vim.tbl_map(function(lang)
-          return require("lang" .. "." .. lang .. ".test")(lang)
-        end, test_langs),
+        adapters = get_neotest_adapters(test_langs),
       })
     end,
   },
