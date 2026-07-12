@@ -15,8 +15,8 @@ local function get_config()
   local extensions = {}
   local adapter_specs = {}
   for lang, module in pairs(require("loaders").load()) do
-    if module.neotest then
-      for _, spec in ipairs(normalize_specs(module.neotest)) do
+    if module.test then
+      for _, spec in ipairs(normalize_specs(module.test)) do
         local adapter_name = spec.name or ("neotest-" .. lang)
         table.insert(extensions, { adapter_name, dep_of = "neotest" })
         table.insert(adapter_specs, { name = adapter_name, config = spec.config })

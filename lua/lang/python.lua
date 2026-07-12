@@ -1,5 +1,6 @@
+---@type LangSpec
 return {
-  neotest = true,
+  test = true,
   lsp = {
     basedpyright = {
       filetypes = { "python" },

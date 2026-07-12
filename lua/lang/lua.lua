@@ -1,3 +1,4 @@
+---@type LangSpec
 return {
   lsp = {
     lua_ls = {
@@ -6,7 +7,7 @@ return {
         Lua = {
           signatureHelp = { enabled = true },
           diagnostics = {
-            globals = { "nixInfo", "vim", "Snacks", "blubb" },
+            globals = { "nixInfo", "vim", "Snacks" },
             disable = { "missing-fields" },
           },
         },

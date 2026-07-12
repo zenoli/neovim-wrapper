@@ -1,3 +1,4 @@
+---@type LangSpec
 return {
   lsp = {
     nixd = {
