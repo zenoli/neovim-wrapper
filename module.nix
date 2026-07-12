@@ -29,6 +29,16 @@ inputs:
       nixfmt
     ];
   };
+  config.specs.latex = {
+    data = null;
+    extraPackages = with pkgs; [
+      texlab
+      (texliveSmall.withPackages (ps: [
+        ps.latexmk
+        ps.latexindent
+      ]))
+    ];
+  };
   # You can use the before and after fields to run them before or after other specs or spec of lists of specs
   config.specs.lua = {
     after = [ "general" ];
