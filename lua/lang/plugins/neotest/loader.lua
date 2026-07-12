@@ -14,7 +14,7 @@ end
 local function get_config()
   local extensions = {}
   local adapter_specs = {}
-  for lang, module in pairs(require("loaders").load()) do
+  for lang, module in pairs(require("lang").load()) do
     if module.test then
       for _, spec in ipairs(normalize_specs(module.test)) do
         local adapter_name = spec.name or ("neotest-" .. lang)

@@ -1,5 +1,5 @@
 ---@type lze.PluginSpec[]
-return vim.list_extend(require("loaders.lsp").get_specs(), {
+return vim.list_extend(require("lang.plugins.lsp.loader").get_specs(), {
   {
     "nvim-lspconfig",
     lsp = function(plugin)

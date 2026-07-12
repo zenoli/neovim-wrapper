@@ -7,7 +7,7 @@ return {
   -- keys = "",
   -- colorscheme = "",
   after = function(plugin)
-    require("lint").linters_by_ft = require("loaders.lint").get_linters_by_ft()
+    require("lint").linters_by_ft = require("lang.plugins.nvim-lint.loader").get_linters_by_ft()
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       callback = function()

@@ -1,7 +1,7 @@
 ---@return table<string, string[]>
 local function get_formatters_by_ft()
   local formatters_by_ft = {}
-  for lang, module in pairs(require("loaders").load()) do
+  for lang, module in pairs(require("lang").load()) do
     if module.format then
       if vim.islist(module.format) then
         formatters_by_ft[lang] = module.format

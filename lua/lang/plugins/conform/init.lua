@@ -8,7 +8,7 @@ return {
     local conform = require("conform")
 
     conform.setup({
-      formatters_by_ft = require("loaders.format").get_formatters_by_ft(),
+      formatters_by_ft = require("lang.plugins.conform.loader").get_formatters_by_ft(),
       default_format_opts = {
         lsp_format = "fallback",
       },
