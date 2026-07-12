@@ -13,6 +13,10 @@
     url = "github:BirdeeHub/lzextras";
     flake = false;
   };
+  inputs.nvim-texlabconfig = {
+    url = "github:f3fora/nvim-texlabconfig";
+    flake = false;
+  };
   outputs =
     {
       self,

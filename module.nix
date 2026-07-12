@@ -30,7 +30,7 @@ inputs:
     ];
   };
   config.specs.latex = {
-    data = null;
+    data = pkgs.callPackage ./pkgs/nvim-texlabconfig.nix { src = inputs.nvim-texlabconfig; };
     extraPackages = with pkgs; [
       texlab
       (texliveSmall.withPackages (ps: [
