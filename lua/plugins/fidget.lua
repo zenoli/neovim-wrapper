@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "fidget.nvim",
   event = "DeferredUIEnter",

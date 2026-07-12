@@ -4,6 +4,7 @@ local signs = {
   changedelete = { text = "▎" },
   untracked = { text = "▎" },
 }
+---@type lze.PluginSpec
 return {
   "gitsigns.nvim",
   event = "DeferredUIEnter",

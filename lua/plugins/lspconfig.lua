@@ -1,3 +1,4 @@
+---@type lze.PluginSpec[]
 return vim.list_extend(require("loaders.lsp").get_specs(), {
   {
     "nvim-lspconfig",

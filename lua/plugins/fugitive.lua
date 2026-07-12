@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "vim-fugitive",
   cmd = { "Git", "GBrowse" },

@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "nvim-lint",
   -- cmd = { "" },

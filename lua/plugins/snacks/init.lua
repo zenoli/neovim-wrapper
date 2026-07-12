@@ -1,5 +1,6 @@
 local cursor_relative_input = true
 
+---@type lze.PluginSpec
 return {
   "snacks.nvim",
   lazy = false,

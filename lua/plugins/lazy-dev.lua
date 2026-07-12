@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   -- lazydev makes your lua lsp load only the relevant definitions for a file.
   -- It also gives us a nice way to correlate globals we create with files.

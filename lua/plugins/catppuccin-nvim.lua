@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "catppuccin-nvim",
   priority = 1000,
