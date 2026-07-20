@@ -1,4 +1,3 @@
-_inputs:
 { pkgs, lib, ... }:
 {
   config.specs.lua = {
