@@ -29,7 +29,7 @@
       module = nixpkgs.lib.modules.importApply ./module.nix inputs;
       wrapper = wrappers.lib.evalModule module;
       nvim-texlabconfigOverlay = final: prev: {
-        nvim-texlabconfig = prev.callPackage ./lua/lang/config/latex/nvim-texlabconfig.nix {
+        nvim-texlabconfig = prev.callPackage ./pkgs/nvim-texlabconfig.nix {
           src = inputs.nvim-texlabconfig;
         };
       };
