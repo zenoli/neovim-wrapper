@@ -8,9 +8,10 @@ local function load()
     return cache
   end
   cache = {}
-  for name, _ in vim.fs.dir(lang_dir) do
-    local lang = name:match("^(.+)%.lua$") or name
-    cache[lang] = require("lang.config." .. lang)
+  for name, type in vim.fs.dir(lang_dir) do
+    if type == "directory" then
+      cache[name] = require("lang.config." .. name)
+    end
   end
   return cache
 end
