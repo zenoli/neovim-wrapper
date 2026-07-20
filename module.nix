@@ -10,7 +10,9 @@ let
   langConfigDir = ./lua/lang/config;
   langModules = lib.pipe (builtins.readDir langConfigDir) [
     (lib.filterAttrs (_: type: type == "directory"))
-    (lib.mapAttrsToList (name: _: langConfigDir + "/${name}/default.nix"))
+    (lib.mapAttrsToList (
+      name: _: lib.modules.importApply (langConfigDir + "/${name}/default.nix") inputs
+    ))
   ];
 in
 {

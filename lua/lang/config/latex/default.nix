@@ -1,10 +1,11 @@
+inputs:
 { pkgs, lib, ... }:
 {
   config.specs.latex = {
     lazy = true;
     data = [
       {
-        data = pkgs.nvim-texlabconfig;
+        data = pkgs.callPackage ./pkgs/nvim-texlabconfig.nix { src = inputs.nvim-texlabconfig; };
         lazy = false;
       }
     ];

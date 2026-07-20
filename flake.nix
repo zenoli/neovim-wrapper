@@ -28,17 +28,6 @@
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all;
       module = nixpkgs.lib.modules.importApply ./module.nix inputs;
       wrapper = wrappers.lib.evalModule module;
-      nvim-texlabconfigOverlay = final: prev: {
-        nvim-texlabconfig = prev.callPackage ./pkgs/nvim-texlabconfig.nix {
-          src = inputs.nvim-texlabconfig;
-        };
-      };
-      pkgsFor =
-        system:
-        import nixpkgs {
-          inherit system;
-          overlays = [ nvim-texlabconfigOverlay ];
-        };
     in
     {
       wrapperModules = {
@@ -50,14 +39,13 @@
         default = self.wrappers.neovim;
       };
       overlays = {
-        nvim-texlabconfig = nvim-texlabconfigOverlay;
         neovim = final: prev: { neovim = self.wrappers.neovim.wrap { pkgs = final; }; };
         default = self.overlays.neovim;
       };
       packages = forAllSystems (
         system:
         let
-          pkgs = pkgsFor system;
+          pkgs = import nixpkgs { inherit system; };
         in
         {
           neovim = self.wrappers.neovim.wrap { inherit pkgs; };
@@ -65,12 +53,8 @@
         }
       );
       devShells = forAllSystems (system: {
-        default = import ./shell.nix { pkgs = pkgsFor system; };
+        default = import ./shell.nix { pkgs = import nixpkgs { inherit system; }; };
       });
-      # home manager and nixos modules
-      # `wrappers.neovim.enable = true`
-      # You can set any of the options.
-      # But that is how you enable it.
       nixosModules = {
         default = self.nixosModules.neovim;
         neovim = wrappers.lib.getInstallModule {
@@ -80,7 +64,6 @@
       };
       homeModules = {
         default = self.homeModules.neovim;
-        # they produce generically importable modules
         neovim = self.nixosModules.neovim;
       };
     };
