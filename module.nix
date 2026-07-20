@@ -6,8 +6,16 @@ inputs:
   pkgs,
   ...
 }:
+let
+  langConfigDir = ./lua/lang/config;
+  langModules = lib.pipe (builtins.readDir langConfigDir) [
+    (lib.filterAttrs (_: type: type == "directory"))
+    (lib.mapAttrsToList (name: _: langConfigDir + "/${name}/default.nix"))
+  ];
+in
 {
-  imports = [ wlib.wrapperModules.neovim ];
+  imports = [ wlib.wrapperModules.neovim ] ++ langModules;
+
   options.nvim-lib.neovimPlugins = lib.mkOption {
     readOnly = true;
     type = lib.types.attrsOf wlib.types.stringable;
@@ -16,39 +24,11 @@ inputs:
 
   # config.settings.config_directory = ./.;
   config.settings.config_directory = "/home/olivier/repos/neovim";
-  config.specs.lze = with config.nvim-lib.neovimPlugins; [
-    lze
-    lzextras
-  ];
-
-  # you can name these whatever you want.
-  config.specs.nix = {
-    data = null;
-    extraPackages = with pkgs; [
-      nixd
-      nixfmt
-    ];
-  };
-  # You can use the before and after fields to run them before or after other specs or spec of lists of specs
-  config.specs.lua = {
-    after = [ "general" ];
-    lazy = true;
-    data = with pkgs.vimPlugins; [
-      lazydev-nvim
-    ];
-    extraPackages = with pkgs; [
-      lua-language-server
-      stylua
-    ];
-  };
-
-  config.specs.python = {
-    after = [ "general" ];
-    lazy = true;
-    data = with pkgs.vimPlugins; [ neotest-python ];
-    extraPackages = with pkgs; [
-      basedpyright
-      ruff
+  config.specs.lze = {
+    after = [ ];
+    data = with config.nvim-lib.neovimPlugins; [
+      lze
+      lzextras
     ];
   };
 
@@ -78,6 +58,7 @@ inputs:
       }
       blink-cmp
       blink-compat
+      blink-pairs
       catppuccin-nvim
       papercolor-theme
       cmp-cmdline
@@ -114,6 +95,7 @@ inputs:
         default = [ ];
         description = "a extraPackages spec field to put packages to suffix to the PATH";
       };
+      config.after = lib.mkIf (parentSpec == null) (lib.mkDefault [ "general" ]);
     };
   config.extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [ ])) [ ];
 

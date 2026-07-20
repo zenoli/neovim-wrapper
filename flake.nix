@@ -13,6 +13,10 @@
     url = "github:BirdeeHub/lzextras";
     flake = false;
   };
+  inputs.nvim-texlabconfig = {
+    url = "github:f3fora/nvim-texlabconfig";
+    flake = false;
+  };
   outputs =
     {
       self,
@@ -24,8 +28,18 @@
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all;
       module = nixpkgs.lib.modules.importApply ./module.nix inputs;
       wrapper = wrappers.lib.evalModule module;
+      nvim-texlabconfigOverlay = final: prev: {
+        nvim-texlabconfig = prev.callPackage ./pkgs/nvim-texlabconfig.nix {
+          src = inputs.nvim-texlabconfig;
+        };
+      };
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ nvim-texlabconfigOverlay ];
+        };
     in
-    # for demonstration purposes, we will set up all the outputs.
     {
       wrapperModules = {
         neovim = module;
@@ -36,19 +50,23 @@
         default = self.wrappers.neovim;
       };
       overlays = {
+        nvim-texlabconfig = nvim-texlabconfigOverlay;
         neovim = final: prev: { neovim = self.wrappers.neovim.wrap { pkgs = final; }; };
         default = self.overlays.neovim;
       };
       packages = forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = pkgsFor system;
         in
         {
           neovim = self.wrappers.neovim.wrap { inherit pkgs; };
           default = self.packages.${system}.neovim;
         }
       );
+      devShells = forAllSystems (system: {
+        default = import ./shell.nix { pkgs = pkgsFor system; };
+      });
       # home manager and nixos modules
       # `wrappers.neovim.enable = true`
       # You can set any of the options.

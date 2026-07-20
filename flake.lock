@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "nvim-texlabconfig": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740387439,
+        "narHash": "sha256-1dvC0oPKFWFUWbl4204Y9yGOsAPwQeYwfcTFRPfhuNQ=",
+        "owner": "f3fora",
+        "repo": "nvim-texlabconfig",
+        "rev": "bac44e8e4dfe37fc4f4ffba86e144fe5da2322e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "f3fora",
+        "repo": "nvim-texlabconfig",
+        "type": "github"
+      }
+    },
     "plugins-lze": {
       "flake": false,
       "locked": {
@@ -51,6 +67,7 @@
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
+        "nvim-texlabconfig": "nvim-texlabconfig",
         "plugins-lze": "plugins-lze",
         "plugins-lzextras": "plugins-lzextras",
         "wrappers": "wrappers"

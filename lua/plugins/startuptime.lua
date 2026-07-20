@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "vim-startuptime",
   cmd = { "StartupTime" },

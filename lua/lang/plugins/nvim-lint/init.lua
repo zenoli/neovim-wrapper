@@ -1,3 +1,4 @@
+---@type lze.PluginSpec
 return {
   "nvim-lint",
   -- cmd = { "" },
@@ -6,14 +7,7 @@ return {
   -- keys = "",
   -- colorscheme = "",
   after = function(plugin)
-    require("lint").linters_by_ft = {
-      python = { "ruff" },
-      -- NOTE: download some linters
-      -- and configure them here
-      -- markdown = {'vale',},
-      -- javascript = { 'eslint' },
-      -- typescript = { 'eslint' },
-    }
+    require("lint").linters_by_ft = require("lang.plugins.nvim-lint.loader").get_linters_by_ft()
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       callback = function()

@@ -10,12 +10,6 @@ map("v", "<leader>s<leader>", ": s/", { desc = "Substitute visual selection" })
 map("n", "<leader><esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart neovim" })
 
--- -- window navigation
--- map("n", "<A-h>", "<C-w>h", { desc = "Move to left window" })
--- map("n", "<A-j>", "<C-w>j", { desc = "Move to bottom window" })
--- map("n", "<A-k>", "<C-w>k", { desc = "Move to top window" })
--- map("n", "<A-l>", "<C-w>l", { desc = "Move to right window" })
-
 -- scrolling
 map("n", "<c-j>", "5<c-e>", { desc = "Scroll down" })
 map("n", "<c-k>", "5<c-y>", { desc = "Scroll up" })
@@ -35,6 +29,4 @@ map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move selected lines up" })
 
 -- Move selected lines horizontally
 map("v", ">", ">gv", { desc = "Indent selected lines" })
-map("v", "<", "<gv", { desc = "Unindent selected lines" });
-
-
+map("v", "<", "<gv", { desc = "Unindent selected lines" })
