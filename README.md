@@ -69,7 +69,7 @@ it to always build from committed source).
 ├── init.lua          # entrypoint: sets up lazy-loading, loads plugins + lang specs
 ├── lua/              # Pure lua configuration. See lua/README.md
 │   ├── lang/         # language-specific config, one folder per language — see lua/lang/README.md
-│   └── plugins/      # general, always-on plugins (colorscheme, git, statusline, ...)
+│   └── plugins/      # general language-agnostic plugins (colorscheme, git, statusline, ...)
 ├── nix/              # Nix configuration. See nix/README.md
 │   ├── wrapper/      # plugin/tool declarations + language module wiring
 │   └── shell.nix     # dev shell
