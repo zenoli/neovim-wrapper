@@ -3,7 +3,7 @@ inputs:
 {
   config.specs.nix = {
     data = null;
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       nixd
       nixfmt
     ];

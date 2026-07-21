@@ -36,7 +36,7 @@ in
 
   config.specs.general = {
     after = [ "lze" ];
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       lazygit
       tree-sitter
     ];
@@ -44,7 +44,7 @@ in
     data = with pkgs.vimPlugins; [
       {
         data = snacks-nvim;
-        extraPackages = with pkgs; [
+        runtimePkgs = with pkgs; [
           fd
           ripgrep
         ];
@@ -83,14 +83,14 @@ in
       ...
     }:
     {
-      options.extraPackages = lib.mkOption {
+      options.runtimePkgs = lib.mkOption {
         type = lib.types.listOf wlib.types.stringable;
         default = [ ];
-        description = "a extraPackages spec field to put packages to suffix to the PATH";
+        description = "a runtimePkgs spec field to put packages to suffix to the PATH";
       };
       config.after = lib.mkIf (parentSpec == null) (lib.mkDefault [ "general" ]);
     };
-  config.extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [ ])) [ ];
+  config.runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [ ])) [ ];
 
   options.nvim-lib.pluginsFromPrefix = lib.mkOption {
     type = lib.types.raw;

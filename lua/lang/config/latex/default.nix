@@ -9,7 +9,7 @@ inputs:
         lazy = false;
       }
     ];
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       texlab
       (texliveSmall.withPackages (ps: [
         ps.latexmk

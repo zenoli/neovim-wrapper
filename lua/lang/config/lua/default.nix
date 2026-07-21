@@ -6,7 +6,7 @@ inputs:
     data = with pkgs.vimPlugins; [
       lazydev-nvim
     ];
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       lua-language-server
       stylua
     ];
