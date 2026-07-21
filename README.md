@@ -1,18 +1,5 @@
 # neovim-wrapper
 
-<!--toc:start-->
-
-- [neovim-wrapper](#neovim-wrapper)
-- [Table of Contents](#table-of-contents)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Directory Structure](#directory-structure)
-- [Core Plugins](#core-plugins)
-- [Language Configs](#language-configs)
-- [Credits](#credits)
-
-<!--toc:end-->
-
 A Neovim configuration built as a
 [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules) `neovim`
 wrapper.
@@ -21,8 +8,7 @@ wrapper.
 
 - [Features](#features)
 - [Quick Start](#quick-start)
-- [Directory Structure](#directory-structure)
-- [Core Plugins](#core-plugins)
+- [Directory Structure](#directory-structure) [Core Plugins](#core-plugins)
 - [Language Configs](#language-configs)
 - [Credits](#credits)
 
