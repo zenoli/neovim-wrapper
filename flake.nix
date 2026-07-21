@@ -3,12 +3,10 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   inputs.wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
   inputs.wrappers.inputs.nixpkgs.follows = "nixpkgs";
-  # Demo on fetching plugins from outside nixpkgs
   inputs.plugins-lze = {
     url = "github:BirdeeHub/lze";
     flake = false;
   };
-  # These 2 are already in nixpkgs, however this ensures you always fetch the most up to date version!
   inputs.plugins-lzextras = {
     url = "github:BirdeeHub/lzextras";
     flake = false;
