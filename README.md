@@ -128,9 +128,3 @@ how to add or remove a language.
 
 Built on [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules) and
 [lze](https://github.com/BirdeeHub/lze) for lazy loading.
-
-- item1
-- item2
-  - subitem 1
-  * [x] subitem 1
-  - [ ] test
