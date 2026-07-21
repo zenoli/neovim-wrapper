@@ -29,7 +29,7 @@
       systems = nixpkgs.lib.platforms.all;
       imports = [ wrappers.flakeModules.wrappers ];
 
-      flake.wrappers.neovim = nixpkgs.lib.modules.importApply ./module.nix inputs;
+      flake.wrappers.neovim = nixpkgs.lib.modules.importApply ./nix/wrapper inputs;
 
       flake.nixosModules =
         (builtins.mapAttrs (_: v: v.install) self.wrappers)
@@ -43,7 +43,7 @@
         in
         {
           packages.default = config.packages.neovim;
-          devShells.default = import ./shell.nix { inherit pkgs; };
+          devShells.default = import ./nix/shell.nix { inherit pkgs; };
         };
     };
 }

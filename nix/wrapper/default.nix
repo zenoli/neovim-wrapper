@@ -7,7 +7,7 @@ inputs:
   ...
 }:
 let
-  langConfigDir = ./lua/lang/config;
+  langConfigDir = ../../lua/lang/config;
   langModules = lib.pipe (builtins.readDir langConfigDir) [
     (lib.filterAttrs (_: type: type == "directory"))
     (lib.mapAttrsToList (
@@ -16,7 +16,11 @@ let
   ];
 in
 {
-  imports = [ wlib.wrapperModules.neovim ] ++ langModules;
+  imports = [
+    wlib.wrapperModules.neovim
+    ./tools.nix
+    ./plugins.nix
+  ] ++ langModules;
 
   options.nvim-lib.neovimPlugins = lib.mkOption {
     readOnly = true;
@@ -31,46 +35,6 @@ in
     data = with config.nvim-lib.neovimPlugins; [
       lze
       lzextras
-    ];
-  };
-
-  config.specs.general = {
-    after = [ "lze" ];
-    runtimePkgs = with pkgs; [
-      lazygit
-      tree-sitter
-    ];
-    lazy = true;
-    data = with pkgs.vimPlugins; [
-      {
-        data = snacks-nvim;
-        runtimePkgs = with pkgs; [
-          fd
-          ripgrep
-        ];
-      }
-      blink-cmp
-      blink-compat
-      blink-pairs
-      catppuccin-nvim
-      papercolor-theme
-      cmp-cmdline
-      colorful-menu-nvim
-      conform-nvim
-      dropbar-nvim
-      fidget-nvim
-      gitsigns-nvim
-      lualine-nvim
-      neotest
-      nvim-lint
-      nvim-lspconfig
-      nvim-surround
-      nvim-treesitter-textobjects
-      nvim-treesitter.withAllGrammars
-      vim-fugitive
-      vim-startuptime
-      vim-tmux-navigator
-      which-key-nvim
     ];
   };
 
