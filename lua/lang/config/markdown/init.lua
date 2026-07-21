@@ -5,5 +5,5 @@ return {
       filetypes = { "markdown", "markdown.mdx" },
     },
   },
-  format = { "mdformat" },
+  format = { markdown = { "prettierd", "prettier", stop_after_first = true } },
 }

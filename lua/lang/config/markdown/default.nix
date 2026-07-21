@@ -8,7 +8,8 @@ inputs:
     ];
     runtimePkgs = with pkgs; [
       marksman
-      mdformat
+      prettier
+      prettierd
     ];
   };
 }

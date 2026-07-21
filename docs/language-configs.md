@@ -28,6 +28,8 @@ Defined in `lua/lang/types.lua`. All fields are optional — a language only set
 
 `LangTestSpec` is `{ name?: string, config?: table }` — `name` overrides the adapter plugin name (default `neotest-<lang>`), `config` is passed to the adapter on `require`.
 
+`format`'s `string[]` shorthand is plain conform.nvim filetype-formatter list — it runs every formatter in the list in sequence (see `lua/lang/config/python/init.lua`'s `ruff_fix` → `ruff_organize_imports` → `ruff_format` chain). It can't carry conform's per-filetype options such as `stop_after_first` (run only the first available formatter), because those are expressed as extra hash keys on the same table (e.g. `{ "prettierd", "prettier", stop_after_first = true }`), and `vim.islist()` — which the loader (`lua/lang/plugins/conform/loader.lua`) uses to tell the two `format` shapes apart — returns `false` for a table that mixes array and hash keys. Use the explicit `table<string, string[]>` form instead when you need those options, e.g. `format = { markdown = { "prettierd", "prettier", stop_after_first = true } }` (see `lua/lang/config/markdown/init.lua`).
+
 See [Core Plugins](../README.md#core-plugins) in the README for what each loader does with these fields.
 
 ## Optional `plugins/` subfolder

@@ -112,10 +112,12 @@ Four plugins are language-extensible: each has a **loader** that scans every lan
 `LangSpec` (see [Language Configs](#language-configs)) and aggregates the relevant field
 into that plugin's setup.
 
-| Plugin | LangSpec field | Behavior | |---|---|---| | nvim-lspconfig | `lsp` |
-Registers & enables each server via `vim.lsp.config` | | conform.nvim | `format` | Maps
-formatters by filetype | | nvim-lint | `lint` | Maps linters by filetype | | neotest |
-`test` | Registers one adapter per language |
+| Plugin         | LangSpec field | Behavior                                             |
+| -------------- | -------------- | ---------------------------------------------------- |
+| nvim-lspconfig | `lsp`          | Registers & enables each server via `vim.lsp.config` |
+| conform.nvim   | `format`       | Maps formatters by filetype                          |
+| nvim-lint      | `lint`         | Maps linters by filetype                             |
+| neotest        | `test`         | Registers one adapter per language                   |
 
 ## Language Configs
 
@@ -135,3 +137,9 @@ how to add or remove a language.
 
 Built on [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules) and
 [lze](https://github.com/BirdeeHub/lze) for lazy loading.
+
+- item1
+- item2
+  - subitem 1
+  * [x] subitem 1
+  - [ ] test
