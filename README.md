@@ -11,11 +11,17 @@ nix run github:zenoli/neovim-wrapper
 
 ## Table of Contents
 
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Directory Structure](#directory-structure)
-- [Documentation](#documentation)
-- [Credits](#credits)
+<!--toc:start-->
+
+- [neovim-wrapper](#neovim-wrapper)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Quick Start](#quick-start)
+  - [Directory Structure](#directory-structure)
+  - [Documentation](#documentation)
+  - [Credits](#credits)
+
+<!--toc:end-->
 
 ## Features
 
@@ -29,7 +35,7 @@ nix run github:zenoli/neovim-wrapper
 - **Bake it in when done** — remove that override and the Lua config is copied into the
   Nix store at build time, giving you an immutable, reproducible package.
 - **Language centered config** — each programming language's config lives in its own
-  module under `lua/lang/`, see [lua/lang/README.md](lua/lang/README.md).
+  module under [`lua/lang/`](lua/lang/README.md).
 
 ## Quick Start
 
@@ -51,17 +57,6 @@ Build it once and inspect the result:
 nix build
 ./result/bin/nvim
 ```
-
-Install it permanently on NixOS or via home-manager:
-
-```nix
-{
-  imports = [ nix-wrapper-neovim.nixosModules.default ]; # or .homeModules.default
-}
-```
-
-A dev shell (`nix develop`) provides a [`plugin-name`](nix/shell.nix) helper for looking
-up a plugin's `pname` in `nixpkgs#vimPlugins`.
 
 If you fork this repo, update or remove the `config_directory` override in
 [`nix/wrapper/default.nix`](nix/wrapper/default.nix) to point at your own clone (or drop
@@ -85,8 +80,6 @@ it to always build from committed source).
 
 - [lua/README.md](lua/README.md) — Pure lua configuration: general plugins, language
   config, LSP keymaps.
-  - [lua/lang/README.md](lua/lang/README.md) — the [`LangSpec`](lua/lang/types.lua)
-    contract and how to add or remove a language.
 - [nix/README.md](nix/README.md) — Nix configuration of the wrapper: Installation of
   neovim plugins and tools (lsp, linters, formatters etc.) declarations, dev shell.
 
