@@ -20,7 +20,7 @@ local import = nixInfo.lze.mod_dir_to_spec
 nixInfo.lze.load({
   require("colorscheme"),
   import("plugins"),
-  import("lang.plugins"),
+  require("lang").specs(),
 })
 
 require("keymaps")
