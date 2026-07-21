@@ -31,10 +31,11 @@
 
       flake.wrappers.neovim = nixpkgs.lib.modules.importApply ./nix/wrapper inputs;
 
-      flake.nixosModules =
-        (builtins.mapAttrs (_: v: v.install) self.wrappers)
-        // { default = self.nixosModules.neovim; };
-      flake.homeModules = self.nixosModules;
+      flake.nixosModules = (builtins.mapAttrs (_: v: v.install) self.wrappers) // {
+        default = self.nixosModules.neovim;
+      };
+      # flake.homeModules = self.nixosModules;
+      flake.homeModules = (builtins.mapAttrs (_: v: v.install) self.wrappers);
 
       perSystem =
         { system, config, ... }:
