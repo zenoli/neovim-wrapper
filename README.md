@@ -1,8 +1,13 @@
 # neovim-wrapper
 
-A Neovim configuration built as a
-[nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules) `neovim`
-wrapper.
+My custom Neovim config wrapped as a nix package using
+[nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules).
+
+Run it from anywhere nix is installed in a single command:
+
+```nix
+nix run github:zenoli/neovim-wrapper
+```
 
 ## Table of Contents
 
