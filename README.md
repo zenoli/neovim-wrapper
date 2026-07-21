@@ -1,5 +1,18 @@
 # neovim-wrapper
 
+<!--toc:start-->
+
+- [neovim-wrapper](#neovim-wrapper)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Directory Structure](#directory-structure)
+- [Core Plugins](#core-plugins)
+- [Language Configs](#language-configs)
+- [Credits](#credits)
+
+<!--toc:end-->
+
 A Neovim configuration built as a
 [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules) `neovim`
 wrapper.
@@ -27,16 +40,22 @@ wrapper.
 
 ## Quick Start
 
-Build and try it without installing anything:
+Build and run it locally:
 
 ```bash
-nix run .
+nix run
+```
+
+or from anywhere:
+
+```bash
+nix run github:zenoli/neovim-wrapper
 ```
 
 Build it once and inspect the result:
 
 ```bash
-nix build .
+nix build
 ./result/bin/nvim
 ```
 
