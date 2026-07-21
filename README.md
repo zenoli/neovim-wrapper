@@ -20,14 +20,16 @@ nix run github:zenoli/neovim-wrapper
 ## Features
 
 - **Reproducible installs** — plugins and tools (LSP servers, formatters, linters, test
-  runners) are declared in Nix and pinned via `flake.lock`.
+  runners) are declared in Nix and pinned via [`flake.lock`](flake.lock).
 - **Lua for everything else** — editor behavior, keymaps, and plugin wiring are plain
-  Lua under `lua/`.
+  Lua under [`lua/`](lua/README.md).
 - **Fast dev iteration** — `config.settings.config_directory`
-  (`nix/wrapper/default.nix`) can point at this repo's path on disk, so Neovim reads Lua
-  config live without a rebuild.
+  ([`nix/wrapper/default.nix`](nix/wrapper/default.nix)) can point at this repo's path
+  on disk, so Neovim reads Lua config live without a rebuild.
 - **Bake it in when done** — remove that override and the Lua config is copied into the
   Nix store at build time, giving you an immutable, reproducible package.
+- **Language centered config** — each programming language's config lives in its own
+  module under `lua/lang/`, see [lua/lang/README.md](lua/lang/README.md).
 
 ## Quick Start
 
@@ -58,12 +60,12 @@ Install it permanently on NixOS or via home-manager:
 }
 ```
 
-A dev shell (`nix develop`) provides a `plugin-name` helper for looking up a plugin's
-`pname` in `nixpkgs#vimPlugins`.
+A dev shell (`nix develop`) provides a [`plugin-name`](nix/shell.nix) helper for looking
+up a plugin's `pname` in `nixpkgs#vimPlugins`.
 
 If you fork this repo, update or remove the `config_directory` override in
-`nix/wrapper/default.nix` to point at your own clone (or drop it to always build from
-committed source).
+[`nix/wrapper/default.nix`](nix/wrapper/default.nix) to point at your own clone (or drop
+it to always build from committed source).
 
 ## Directory Structure
 
@@ -83,8 +85,8 @@ committed source).
 
 - [lua/README.md](lua/README.md) — Pure lua configuration: general plugins, language
   config, LSP keymaps.
-  - [lua/lang/README.md](lua/lang/README.md) — the `LangSpec` contract and how to add or
-    remove a language.
+  - [lua/lang/README.md](lua/lang/README.md) — the [`LangSpec`](lua/lang/types.lua)
+    contract and how to add or remove a language.
 - [nix/README.md](nix/README.md) — Nix configuration of the wrapper: Installation of
   neovim plugins and tools (lsp, linters, formatters etc.) declarations, dev shell.
 
