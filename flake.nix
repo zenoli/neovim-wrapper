@@ -3,6 +3,8 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   inputs.wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
   inputs.wrappers.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+  inputs.flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
   inputs.plugins-lze = {
     url = "github:BirdeeHub/lze";
     flake = false;
@@ -20,49 +22,28 @@
       self,
       nixpkgs,
       wrappers,
+      flake-parts,
       ...
     }@inputs:
-    let
-      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all;
-      module = nixpkgs.lib.modules.importApply ./module.nix inputs;
-      wrapper = wrappers.lib.evalModule module;
-    in
-    {
-      wrapperModules = {
-        neovim = module;
-        default = self.wrapperModules.neovim;
-      };
-      wrappers = {
-        neovim = wrapper.config;
-        default = self.wrappers.neovim;
-      };
-      overlays = {
-        neovim = final: prev: { neovim = self.wrappers.neovim.wrap { pkgs = final; }; };
-        default = self.overlays.neovim;
-      };
-      packages = forAllSystems (
-        system:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = nixpkgs.lib.platforms.all;
+      imports = [ wrappers.flakeModules.wrappers ];
+
+      flake.wrappers.neovim = nixpkgs.lib.modules.importApply ./module.nix inputs;
+
+      flake.nixosModules =
+        (builtins.mapAttrs (_: v: v.install) self.wrappers)
+        // { default = self.nixosModules.neovim; };
+      flake.homeModules = self.nixosModules;
+
+      perSystem =
+        { system, config, ... }:
         let
           pkgs = import nixpkgs { inherit system; };
         in
         {
-          neovim = self.wrappers.neovim.wrap { inherit pkgs; };
-          default = self.packages.${system}.neovim;
-        }
-      );
-      devShells = forAllSystems (system: {
-        default = import ./shell.nix { pkgs = import nixpkgs { inherit system; }; };
-      });
-      nixosModules = {
-        default = self.nixosModules.neovim;
-        neovim = wrappers.lib.getInstallModule {
-          name = "neovim";
-          value = module;
+          packages.default = config.packages.neovim;
+          devShells.default = import ./shell.nix { inherit pkgs; };
         };
-      };
-      homeModules = {
-        default = self.homeModules.neovim;
-        neovim = self.nixosModules.neovim;
-      };
     };
 }
