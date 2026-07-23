@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local bufnr = ev.buf
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    require("lsp.keymaps").load(bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
       vim.lsp.buf.format()
     end, { desc = "Format current buffer with LSP" })
