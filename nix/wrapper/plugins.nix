@@ -29,6 +29,7 @@
       nvim-surround
       nvim-treesitter-textobjects
       nvim-treesitter.withAllGrammars
+      fff-nvim
       vim-fugitive
       vim-startuptime
       vim-tmux-navigator
