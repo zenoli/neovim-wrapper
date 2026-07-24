@@ -11,6 +11,16 @@ return {
         sources = {
           explorer = {
             auto_close = false,
+            hidden = true,
+            ignored = true,
+          },
+          files = {
+            hidden = true,
+            ignored = true,
+          },
+          grep = {
+            hidden = true,
+            ignored = true,
           },
         },
       },
