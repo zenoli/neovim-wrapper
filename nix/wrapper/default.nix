@@ -28,8 +28,24 @@ in
     default = config.nvim-lib.pluginsFromPrefix "plugins-" inputs;
   };
 
-  # config.settings.config_directory = ../../.;
-  config.settings.config_directory = "/home/olivier/repos/neovim";
+  options.devDir = lib.mkOption {
+    type = with lib.types; nullOr str;
+    default = null;
+    description = ''
+      Absolute path to a live config checkout. When set, Neovim reads
+      Lua from it directly (no rebuild per Lua edit). When null, the
+      flake's store snapshot is used.
+    '';
+  };
+
+  # flip: set to e.g. "/home/olivier/repos/neovim" for live dev
+  # config.devDir = null;
+
+  config.settings.config_directory =
+    if config.devDir != null then
+      lib.warn "neovim: dev mode — live config at ${config.devDir}" config.devDir
+    else
+      inputs.self.outPath;
   config.specs.lze = {
     after = [ ];
     data = with config.nvim-lib.neovimPlugins; [
