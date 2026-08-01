@@ -17,6 +17,7 @@ nix run github:zenoli/neovim-wrapper
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Quick Start](#quick-start)
+    - [Hacking on the config](#hacking-on-the-config)
   - [Directory Structure](#directory-structure)
   - [Documentation](#documentation)
   - [Credits](#credits)
@@ -29,11 +30,11 @@ nix run github:zenoli/neovim-wrapper
   runners) are declared in Nix and pinned via [`flake.lock`](flake.lock).
 - **Lua for everything else** — editor behavior, keymaps, and plugin wiring are plain
   Lua under [`lua/`](lua/README.md).
-- **Fast dev iteration** — `config.settings.config_directory`
-  ([`nix/wrapper/default.nix`](nix/wrapper/default.nix)) can point at this repo's path
-  on disk, so Neovim reads Lua config live without a rebuild.
-- **Bake it in when done** — remove that override and the Lua config is copied into the
-  Nix store at build time, giving you an immutable, reproducible package.
+- **Fast dev iteration** — the `neovim-dev` package (the `devDir` option in
+  [`nix/wrapper/default.nix`](nix/wrapper/default.nix)) points Neovim at this repo's
+  path on disk, so it reads Lua config live without a rebuild.
+- **Baked in by default** — the default package copies the Lua config into the Nix
+  store at build time, giving you an immutable, reproducible package.
 - **Language centered config** — each programming language's config lives in its own
   module under [`lua/lang/`](lua/lang/README.md).
 
@@ -58,9 +59,25 @@ nix build
 ./result/bin/nvim
 ```
 
-If you fork this repo, update or remove the `config_directory` override in
-[`nix/wrapper/default.nix`](nix/wrapper/default.nix) to point at your own clone (or drop
-it to always build from committed source).
+### Hacking on the config
+
+The default package bakes the Lua config into the Nix store — editing Lua requires a
+rebuild. For development there is a second package, `neovim-dev`, which reads the Lua
+config live from this repo's working tree (`devDir` in
+[`nix/wrapper/default.nix`](nix/wrapper/default.nix)); Lua edits apply on the next
+launch, no rebuild needed.
+
+The dev shell (`nix develop`) provides both as single commands:
+
+```bash
+dev   # run the neovim-dev package (live Lua config from the working tree)
+run   # run the default package (config baked into the Nix store)
+```
+
+Outside the shell the equivalents are `nix run .#neovim-dev` and `nix run .`.
+
+If you fork this repo, update `devDir` in the `neovim-dev` wrapper
+([`flake.nix`](flake.nix)) to point at your own clone.
 
 ## Directory Structure
 

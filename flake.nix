@@ -29,7 +29,17 @@
       systems = nixpkgs.lib.platforms.all;
       imports = [ wrappers.flakeModules.wrappers ];
 
-      flake.wrappers.neovim = nixpkgs.lib.modules.importApply ./nix/wrapper inputs;
+      flake.wrappers =
+        let
+          neovim = nixpkgs.lib.modules.importApply ./nix/wrapper inputs;
+        in
+        {
+          inherit neovim;
+          neovim-dev = {
+            imports = [ neovim ];
+            devDir = "/home/olivier/repos/neovim";
+          };
+        };
 
       flake.nixosModules = (builtins.mapAttrs (_: v: v.install) self.wrappers) // {
         default = self.nixosModules.neovim;
