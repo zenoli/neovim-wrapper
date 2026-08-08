@@ -50,7 +50,6 @@
       flake.nixosModules = (builtins.mapAttrs (_: v: v.install) self.wrappers) // {
         default = self.nixosModules.neovim;
       };
-      # flake.homeModules = self.nixosModules;
       flake.homeModules = (builtins.mapAttrs (_: v: v.install) self.wrappers);
 
       perSystem =
@@ -69,6 +68,13 @@
               enable = true;
             };
           };
+          formatter =
+            let
+              inherit (config.pre-commit.settings) package configFile;
+            in
+            pkgs.writeShellScriptBin "pre-commit-run" ''
+              ${pkgs.lib.getExe package} run --all-files --config ${configFile}
+            '';
           devShells.default = import ./nix/shell.nix {
             inherit pkgs;
             shellHook = config.pre-commit.shellHook;
