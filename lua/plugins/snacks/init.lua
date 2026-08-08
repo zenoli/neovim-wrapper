@@ -16,11 +16,11 @@ return {
           },
           files = {
             hidden = true,
-            ignored = true,
+            ignored = false,
           },
           grep = {
             hidden = true,
-            ignored = true,
+            ignored = false,
           },
         },
       },
