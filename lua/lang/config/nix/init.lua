@@ -50,10 +50,16 @@ return {
       root_dir = get_root_dir("devenv"),
       on_init = function(client)
         local result = vim
-          .system({ "devenv", "lsp", "--print-config" }, { cwd = client.config.root_dir, text = true })
+          .system(
+            { "devenv", "lsp", "--print-config" },
+            { cwd = client.config.root_dir, text = true }
+          )
           :wait()
         if result.code ~= 0 then
-          vim.notify("devenv lsp --print-config failed: " .. (result.stderr or ""), vim.log.levels.WARN)
+          vim.notify(
+            "devenv lsp --print-config failed: " .. (result.stderr or ""),
+            vim.log.levels.WARN
+          )
           return
         end
         local ok, settings = pcall(vim.json.decode, result.stdout)
