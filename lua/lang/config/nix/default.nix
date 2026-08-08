@@ -6,6 +6,7 @@ inputs:
     runtimePkgs = with pkgs; [
       nixd
       nixfmt
+      devenv
     ];
   };
 }

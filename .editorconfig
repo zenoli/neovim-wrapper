@@ -1,3 +1,6 @@
 [*]
 indent_style = space
 indent_size = 2
+
+[*.lua]
+max_line_length = 88

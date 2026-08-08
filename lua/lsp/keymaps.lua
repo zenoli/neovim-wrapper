@@ -4,7 +4,12 @@ local function map(mode, lhs, rhs, opts)
   Snacks.keymap.set(mode, lhs, rhs, opts)
 end
 
-map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", lsp = { method = "textDocument/rename" } })
+map(
+  "n",
+  "<leader>rn",
+  vim.lsp.buf.rename,
+  { desc = "[R]e[n]ame", lsp = { method = "textDocument/rename" } }
+)
 map(
   "n",
   "<leader>ca",
@@ -52,8 +57,12 @@ map(
 
 map("n", "<leader>ih", function()
   local bufnr = vim.api.nvim_get_current_buf()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+  vim.lsp.inlay_hint.enable(
+    not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
+    { bufnr = bufnr }
+  )
 end, { desc = "Toggle [I]nlay [H]ints", lsp = { method = "textDocument/inlayHint" } })
+
 -- Lesser used LSP functionality
 map(
   "n",
