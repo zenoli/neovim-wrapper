@@ -1,8 +1,32 @@
+local DEVENV_MARKERS = { "devenv.nix", "devenv.yaml" }
+local NIXD_MARKERS = { "flake.nix", ".git" }
+
+-- Makes nixd and devenv mutually exclusive per buffer: devenv projects (any
+-- ancestor with a devenv.nix/devenv.yaml) get `devenv lsp`; everything else
+-- gets plain nixd.
+---@param name "nixd" | "devenv"
+---@return fun(bufnr: integer, on_dir: fun(root_dir: string))
+local function get_root_dir(name)
+  return function(bufnr, on_dir)
+    local devenv_root = vim.fs.root(bufnr, DEVENV_MARKERS)
+    if name == "devenv" then
+      if devenv_root then
+        on_dir(devenv_root)
+      end
+    else
+      if not devenv_root then
+        on_dir(vim.fs.root(bufnr, NIXD_MARKERS) or vim.fn.getcwd())
+      end
+    end
+  end
+end
+
 ---@type LangSpec
 return {
   lsp = {
     nixd = {
       filetypes = { "nix" },
+      root_dir = get_root_dir("nixd"),
       settings = {
         nixd = {
           nixpkgs = {
@@ -23,7 +47,7 @@ return {
     devenv = {
       filetypes = { "nix" },
       cmd = { "devenv", "lsp" },
-      root_markers = { "devenv.nix", "devenv.yaml" },
+      root_dir = get_root_dir("devenv"),
       -- `devenv lsp` just launches a plain nixd process; it doesn't push its
       -- own config into it. nixd pulls settings via workspace/configuration,
       -- so we fetch the project-specific config devenv would use and hand
