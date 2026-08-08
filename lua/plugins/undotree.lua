@@ -10,7 +10,7 @@ return {
         "<leader>U",
         "<cmd>Undotree<cr>",
         mode = { "n" },
-        desc = "Undo Tree"
+        desc = "Undo Tree",
       },
     },
   },

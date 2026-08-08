@@ -9,12 +9,12 @@ return {
     event = "DeferredUIEnter",
     after = function(_)
       require("blink.cmp").setup({
-        keymap = { preset = 'default' },
+        keymap = { preset = "default" },
         completion = {
           menu = {
             draw = {
               columns = { { "kind_icon" }, { "label", gap = 1 } },
-              treesitter = { 'lsp' },
+              treesitter = { "lsp" },
               components = {
                 label = {
                   text = function(ctx)
@@ -30,7 +30,7 @@ return {
           documentation = {
             auto_show = true,
             auto_show_delay_ms = 500,
-          }
+          },
         },
         cmdline = {
           completion = {
@@ -41,9 +41,13 @@ return {
           sources = function()
             local type = vim.fn.getcmdtype()
             -- Search forward and backward
-            if type == '/' or type == '?' then return { 'buffer' } end
+            if type == "/" or type == "?" then
+              return { "buffer" }
+            end
             -- Commands
-            if type == ':' or type == '@' then return { 'cmdline' } end
+            if type == ":" or type == "@" then
+              return { "cmdline" }
+            end
             return {}
           end,
         },
@@ -55,5 +59,5 @@ return {
         },
       })
     end,
-  }
+  },
 }

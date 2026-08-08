@@ -4,7 +4,7 @@ return {
     texlab = {
       settings = {
         texlab = {
-          filetypes = { 'tex', 'plaintex', 'bib' },
+          filetypes = { "tex", "plaintex", "bib" },
           auxDirectory = ".",
           bibtexFormatter = "texlab",
           build = {

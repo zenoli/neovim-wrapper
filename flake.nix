@@ -17,17 +17,23 @@
     url = "github:f3fora/nvim-texlabconfig";
     flake = false;
   };
+  inputs.git-hooks.url = "github:cachix/git-hooks.nix";
+  inputs.git-hooks.inputs.nixpkgs.follows = "nixpkgs";
   outputs =
     {
       self,
       nixpkgs,
       wrappers,
       flake-parts,
+      git-hooks,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = nixpkgs.lib.platforms.all;
-      imports = [ wrappers.flakeModules.wrappers ];
+      imports = [
+        wrappers.flakeModules.wrappers
+        git-hooks.flakeModule
+      ];
 
       flake.wrappers =
         let
@@ -54,7 +60,22 @@
         in
         {
           packages.default = config.packages.neovim;
-          devShells.default = import ./nix/shell.nix { inherit pkgs; };
+          pre-commit.pkgs = pkgs;
+          pre-commit.settings.hooks = {
+            stylua = {
+              enable = true;
+              entry = "${pkgs.stylua}/bin/stylua --check --respect-ignores";
+            };
+            nixfmt = {
+              enable = true;
+              entry = "${pkgs.nixfmt}/bin/nixfmt --check";
+            };
+          };
+          devShells.default = import ./nix/shell.nix {
+            inherit pkgs;
+            shellHook = config.pre-commit.shellHook;
+            extraPackages = config.pre-commit.settings.enabledPackages;
+          };
         };
     };
 }

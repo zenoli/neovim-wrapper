@@ -6,7 +6,8 @@ do
   ---@type lzextras | lze
   nixInfo.lze = setmetatable(require("lze"), getmetatable(require("lzextras")))
   function nixInfo.get_nix_plugin_path(name)
-    return nixInfo(nil, "plugins", "lazy", name) or nixInfo(nil, "plugins", "start", name)
+    return nixInfo(nil, "plugins", "lazy", name)
+      or nixInfo(nil, "plugins", "start", name)
   end
 end
 
