@@ -20,7 +20,8 @@ in
     wlib.wrapperModules.neovim
     ./tools.nix
     ./plugins.nix
-  ] ++ langModules;
+  ]
+  ++ langModules;
 
   options.nvim-lib.neovimPlugins = lib.mkOption {
     readOnly = true;

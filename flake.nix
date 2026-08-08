@@ -17,17 +17,23 @@
     url = "github:f3fora/nvim-texlabconfig";
     flake = false;
   };
+  inputs.git-hooks.url = "github:cachix/git-hooks.nix";
+  inputs.git-hooks.inputs.nixpkgs.follows = "nixpkgs";
   outputs =
     {
       self,
       nixpkgs,
       wrappers,
       flake-parts,
+      git-hooks,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = nixpkgs.lib.platforms.all;
-      imports = [ wrappers.flakeModules.wrappers ];
+      imports = [
+        wrappers.flakeModules.wrappers
+        git-hooks.flakeModule
+      ];
 
       flake.wrappers =
         let
@@ -44,7 +50,6 @@
       flake.nixosModules = (builtins.mapAttrs (_: v: v.install) self.wrappers) // {
         default = self.nixosModules.neovim;
       };
-      # flake.homeModules = self.nixosModules;
       flake.homeModules = (builtins.mapAttrs (_: v: v.install) self.wrappers);
 
       perSystem =
@@ -54,7 +59,27 @@
         in
         {
           packages.default = config.packages.neovim;
-          devShells.default = import ./nix/shell.nix { inherit pkgs; };
+          pre-commit.pkgs = pkgs;
+          pre-commit.settings.hooks = {
+            stylua = {
+              enable = true;
+            };
+            nixfmt = {
+              enable = true;
+            };
+          };
+          formatter =
+            let
+              inherit (config.pre-commit.settings) package configFile;
+            in
+            pkgs.writeShellScriptBin "pre-commit-run" ''
+              ${pkgs.lib.getExe package} run --all-files --config ${configFile}
+            '';
+          devShells.default = import ./nix/shell.nix {
+            inherit pkgs;
+            shellHook = config.pre-commit.shellHook;
+            extraPackages = config.pre-commit.settings.enabledPackages;
+          };
         };
     };
 }

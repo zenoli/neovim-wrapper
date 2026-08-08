@@ -11,7 +11,6 @@ local options = {
   laststatus = 3,
   selectmode = "mouse",
 
-
   termguicolors = true,
 
   -- Indentation

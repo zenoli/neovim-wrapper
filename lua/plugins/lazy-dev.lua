@@ -8,8 +8,14 @@ return {
   after = function(_)
     require("lazydev").setup({
       library = {
-        { words = { "nixInfo%.lze", "lze" }, path = nixInfo("lze", "plugins", "start", "lze") .. "/lua" },
-        { words = { "nixInfo%.lze" }, path = nixInfo("lzextras", "plugins", "start", "lzextras") .. "/lua" },
+        {
+          words = { "nixInfo%.lze", "lze" },
+          path = nixInfo("lze", "plugins", "start", "lze") .. "/lua",
+        },
+        {
+          words = { "nixInfo%.lze" },
+          path = nixInfo("lzextras", "plugins", "start", "lzextras") .. "/lua",
+        },
       },
     })
   end,

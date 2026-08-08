@@ -9,7 +9,7 @@ return {
     "TmuxNavigatePrevious",
     "TmuxNavigatorProcessList",
   },
-  before = function ()
+  before = function()
     vim.g.tmux_navigator_no_mappings = 1
   end,
   keys = {

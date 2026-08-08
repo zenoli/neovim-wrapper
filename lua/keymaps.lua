@@ -17,7 +17,11 @@ map("n", "<c-l>", "5zl", { desc = "Scroll down" })
 map("n", "<c-h>", "5zh", { desc = "Scroll up" })
 
 -- Don't move on *
-map("n", "*", ":let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>")
+map(
+  "n",
+  "*",
+  ":let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>"
+)
 
 -- Jump to beginning and end of lines easier.
 map("n", "H", "^")
