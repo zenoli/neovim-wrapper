@@ -64,11 +64,9 @@
           pre-commit.settings.hooks = {
             stylua = {
               enable = true;
-              entry = "${pkgs.stylua}/bin/stylua --check --respect-ignores";
             };
             nixfmt = {
               enable = true;
-              entry = "${pkgs.nixfmt}/bin/nixfmt --check";
             };
           };
           devShells.default = import ./nix/shell.nix {
