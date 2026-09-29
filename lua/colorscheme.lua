@@ -1,11 +1,9 @@
 -- spec for lazy loading colorschemes
 return {
   "trigger_colorscheme",
-  event = "VimEnter",
+  -- no trigger: load synchronously during init so the first frame is already
+  -- themed (deferring to VimEnter flashes the default theme's solid background)
   load = function(_name)
-    -- schedule so it runs after VimEnter
-    vim.schedule(function()
-      vim.cmd.colorscheme("catppuccin")
-    end)
+    vim.cmd.colorscheme("catppuccin")
   end,
 }
