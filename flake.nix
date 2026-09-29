@@ -43,7 +43,7 @@
           inherit neovim;
           neovim-dev = {
             imports = [ neovim ];
-            devDir = "/home/olivier/repos/neovim";
+            devDir = "/home/zenoli/repos/neovim";
           };
         };
 
