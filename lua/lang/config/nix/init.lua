@@ -1,8 +1,10 @@
-local DEVENV_MARKERS = { "devenv.nix", "devenv.yaml" }
+-- devenv.nix alone is not a reliable marker: plain nix repos may contain
+-- modules that happen to be named devenv.nix.
+local DEVENV_MARKERS = { "devenv.yaml", "devenv.lock" }
 local NIXD_MARKERS = { "flake.nix", ".git" }
 
 -- Makes nixd and devenv mutually exclusive per buffer: devenv projects (any
--- ancestor with a devenv.nix/devenv.yaml) get `devenv lsp`; everything else
+-- ancestor with a devenv.yaml/devenv.lock) get `devenv lsp`; everything else
 -- gets plain nixd.
 ---@param name "nixd" | "devenv"
 ---@return fun(bufnr: integer, on_dir: fun(root_dir: string))
@@ -46,7 +48,15 @@ return {
     },
     devenv = {
       filetypes = { "nix" },
-      cmd = { "devenv", "lsp" },
+      -- `devenv lsp` resolves devenv.nix from its cwd, which defaults to
+      -- nvim's cwd rather than root_dir.
+      cmd = function(dispatchers, config)
+        return vim.lsp.rpc.start(
+          { "devenv", "lsp" },
+          dispatchers,
+          { cwd = config.root_dir }
+        )
+      end,
       root_dir = get_root_dir("devenv"),
       on_init = function(client)
         local result = vim
